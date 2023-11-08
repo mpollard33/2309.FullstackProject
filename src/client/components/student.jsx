@@ -1,4 +1,4 @@
-// import styling
+// Import styling
 import { useDispatch } from "react-redux";
 import "./task.css";
 import { faker } from "@faker-js/faker";
@@ -9,10 +9,30 @@ const email = faker.internet.email();
 const imageUrl = faker.image.url();
 const gpa = faker.number.float({ max: 4, precision: 0.01 });
 
-const Student = ({ student }) => {
-  const dispatch = useDispatch();
-  return <div className={"student-style"}>student.student</div>;
+const studentData = {
+  firstName,
+  lastName,
+  email,
+  imageUrl,
+  gpa,
 };
+
+const StudentComponent = ({ student }) => {
+  return (
+    <>
+      <div>
+        <header>
+          <h1>
+            {student.firstName} {student.lastName}
+          </h1>
+        </header>
+        <img src={student.imageUrl} alt={`${student.firstName} ${student.lastName}`} />
+        <p>Email: {student.email}</p>
+      </div>
+    </>
+  );
+};
+
 console.log(`${firstName} ${lastName}`);
 
-export default Student;
+export default StudentComponent;

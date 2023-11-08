@@ -2,7 +2,7 @@ const prisma = require("../prisma");
 const { faker } = require("@faker-js/faker");
 
 const seed = async () => {
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 200; i++) {
     const firstName = faker.person.firstName();
     const lastName = faker.person.lastName();
     const email = faker.internet.email();
