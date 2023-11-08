@@ -1,5 +1,7 @@
 // import styling
 const { faker } = require("@faker-js/faker");
+import Student from "./student";
+import { useSelector } from "react-redux";
 
 const firstName = faker.person.firstName();
 const lastName = faker.person.lastName();
@@ -19,14 +21,17 @@ const mockData = [
   },
 ];
 
-const studentList = () => {
+const students = () => {
+  const task = useSelector(state => {
+
+  });
   return (
     <>
-      {mockData.map((s) => (
-        <Student />
+      {students.map((student, index) => (
+        <Student student={s} key={`${student.student}-${index}`} />
       ))}
     </>
   );
 };
 
-export default studentList;
+export default StudentList;
