@@ -8,6 +8,13 @@ export const studentsApi = createApi({
   endpoints: (builder) => ({
     getStudents: builder.query({
       query: () => "/students",
+      providesTags: "Students",
+    }),
+    updateStudent: builder.mutation({
+      query: (studentId) => ({
+        url: `/api/students/${studentId}`,
+        method: "PUT",
+      }),
     }),
   }),
 });
