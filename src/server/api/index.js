@@ -5,6 +5,10 @@ const jwt = require("./auth/jwt");
 const router = require("express").Router();
 module.exports = router;
 
+router.get("/", (req, res) => {
+  res.send("Reached server api!");
+});
+
 // Attaches user to res.locals if token is valid
 router.use(async (req, res, next) => {
   // Check for token
