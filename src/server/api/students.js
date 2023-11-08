@@ -7,7 +7,7 @@ module.exports = router;
 const DEFAULT_IMG =
   "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png";
 
-/** User must be logged in to access tasks. */
+/** User must be logged in to access students */
 router.use((req, res, next) => {
   if (!res.locals.user) {
     return next(new ServerError(401, "You must be logged in."));
@@ -36,7 +36,7 @@ router.post("/", async (req, res, next) => {
       );
     }
 
-    const student = await prisma.task.create({
+    const student = await prisma.student.create({
       data: {
         firstname: firstName,
         lastname: lastName,
@@ -101,7 +101,7 @@ router.delete("/:id", async (req, res, next) => {
   try {
     const studentId = +req.params.id;
     const student = await prisma.student.findUnique({ where: { studentId } });
-    
+
     validateStudent(res.locals.user, studentId);
 
     await prisma.student.delete({ where: { studentId } });

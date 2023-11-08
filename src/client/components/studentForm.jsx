@@ -10,7 +10,7 @@ const StudentForm = () => {
 
   const handleSubmit = (e) => {
     e.preventdefault();
-    dispatch(addStudent({ student }));
+    // dispatch(addStudent({ student }));
     setStudent("");
   };
   return (
