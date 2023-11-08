@@ -26,13 +26,16 @@ const StudentComponent = ({ student }) => {
             {student.firstName} {student.lastName}
           </h1>
         </header>
-        <img src={student.imageUrl} alt={`${student.firstName} ${student.lastName}`} />
+        <img
+          src={student.imageUrl}
+          alt={`${student.firstName} ${student.lastName}`}
+        />
         <p>Email: {student.email}</p>
       </div>
     </>
   );
 };
 
-console.log(`${firstName} ${lastName}`);
+console.log(StudentComponent(studentData));
 
 export default StudentComponent;
