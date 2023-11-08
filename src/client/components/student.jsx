@@ -1,7 +1,7 @@
 // import styling
 import { useDispatch } from "react-redux";
 import "./task.css";
-const { faker } = require("@faker-js/faker");
+import { faker } from "@faker-js/faker";
 
 const firstName = faker.person.firstName();
 const lastName = faker.person.lastName();
@@ -13,7 +13,6 @@ const Student = ({ student }) => {
   const dispatch = useDispatch();
   return <div className={"student-style"}>student.student</div>;
 };
-console.log(mockData[0].student);
-console.log();
+console.log(`${firstName} ${lastName}`);
 
 export default Student;

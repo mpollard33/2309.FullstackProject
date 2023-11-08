@@ -17,10 +17,10 @@ export default function Root() {
       </nav>
       <main>
         <Outlet />
-        <Routes>
+        {/* <Routes>
           <Route path="/students" element={<StudentList />} />
           <Route path="/new" element={<StudentForm />} />
-        </Routes>
+        </Routes> */}
       </main>
     </>
   );

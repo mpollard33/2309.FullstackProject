@@ -5,11 +5,11 @@ export const studentsApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3000/api",
   }),
-  endpoints: (builder) => {
+  endpoints: (builder) => ({
     getStudents: builder.query({
       query: () => "/students",
-    });
-  },
+    }),
+  }),
 });
 
 export const { useGetStudentsQuery } = studentsApi;
