@@ -14,7 +14,7 @@ model Student {
   id        Int    @id @default(autoincrement())
   firstName String
   lastName  String
-  email     String 
+  email     String
   imageUrl  String @default("http://s3.amazonaws.com/37assets/svn/765-default-avatar.png")
   gpa       Float
 }
