@@ -8,15 +8,37 @@ export const studentsApi = createApi({
   endpoints: (builder) => ({
     getStudents: builder.query({
       query: () => "/students",
-      providesTags: "Students",
+      providesTags: ["Students"],
+    }),
+    createStudent: builder.mutation({
+      query: (newStudent) => ({
+        url: `/students`,
+        method: "POST",
+        body: newStudent,
+      }),
+      invalidatesTags: ["Students"],
     }),
     updateStudent: builder.mutation({
-      query: (studentId) => ({
-        url: `/api/students/${studentId}`,
+      query: ({ studentId, updatedData }) => ({
+        url: `/students/${studentId}`,
         method: "PUT",
+        body: updatedData,
       }),
+      invalidatesTags: ["Students"],
+    }),
+    deleteStudent: builder.mutation({
+      query: (studentId) => ({
+        url: `/students/${studentId}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Students"],
     }),
   }),
 });
 
-export const { useGetStudentsQuery } = studentsApi;
+export const {
+  useGetStudentsQuery,
+  useCreateStudentMutation,
+  useUpdateStudentMutation,
+  useDeleteStudentMutation,
+} = studentsApi;
