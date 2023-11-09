@@ -42,3 +42,5 @@ export const {
   useUpdateStudentMutation,
   useDeleteStudentMutation,
 } = studentsApi;
+
+export const useAddStudentMutation = studentsApi.useCreateStudentMutation;

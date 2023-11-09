@@ -1,32 +1,66 @@
-// import styling
-import { useState } from "react";
-import Student from "./student";
-import { useDispatch } from "react-redux";
-// import { useSelector } from "react-redux";
+import React from "react";
+import useState from "react";
+import { useCreateStudentMutation } from "../store/studentSlice";
 
 const StudentForm = () => {
-  const { student, setStudent } = useState("");
-  const dispatch = useDispatch();
+  const [studentData, setStudentData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventdefault();
-    // dispatch(addStudent({ student }));
-    setStudent("");
+  const dispatch = useDispatch();
+  const [createStudent] = useCreateStudentMutation();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await createStudent(studentData);
+      console.log(`Student created: ${data}`);
+    } catch (err) {
+      console.error(`Error creating Student. ${err}`);
+    }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setStudentData({
+      ...studentData,
+      [name]: value,
+    });
+  };
+
   return (
-    <>
-      <form>
-        <label>
-          Student:
-          <input
-            type="text"
-            value={student}
-            onChange={(e) => setStudent(e.target.value)}
-          />
-        </label>
-        <button>Add Student</button>
-      </form>
-    </>
+    <form onSubmit={handleSubmit}>
+      <label>
+        First Name:
+        <input
+          type="text"
+          name="firstName"
+          value={studentData.firstName}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Last Name:
+        <input
+          type="text"
+          name="lastName"
+          value={studentData.lastName}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={studentData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <button type="submit">Add Student</button>
+    </form>
   );
 };
 

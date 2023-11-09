@@ -1,14 +1,6 @@
-// import styling
-import { faker } from "@faker-js/faker";
-import { useState } from "react";
+import React, { useState } from "react";
 import Student from "./student";
 import { useGetStudentsQuery } from "../store/studentSlice";
-
-const firstName = faker.person.firstName();
-const lastName = faker.person.lastName();
-const email = faker.internet.email();
-const imageUrl = faker.image.url();
-const gpa = faker.number.float({ max: 4, precision: 0.1 });
 
 const StudentsList = () => {
   const { data, isError, isLoading } = useGetStudentsQuery();
@@ -16,14 +8,15 @@ const StudentsList = () => {
   const [sortBy, setSortBy] = useState("lastName");
 
   const sortStudents = (students, sortBy) => {
-    return [...students].sort((a, b) => {
-      if (sortBy === "gpa") {
-        return b[sortBy] - a[sortBy];
-      } else {
-        return a[sortBy].localeCompare(b[sortBy]);
-      }
-    });
+    if (sortBy === "gpa") {
+      return [...students].sort((a, b) => b.gpa - a.gpa);
+    } else if (sortBy === "lastName") {
+      return [...students].sort((a, b) => a.lastName.localeCompare(b.lastName));
+    } else {
+      return students;
+    }
   };
+  
 
   const sortedStudents = sortStudents(data, sortBy);
 
