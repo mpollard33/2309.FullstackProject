@@ -1,5 +1,6 @@
 // import styling
 import { faker } from "@faker-js/faker";
+import { useState } from "react";
 import Student from "./student";
 import { useGetStudentsQuery } from "../store/studentSlice";
 
@@ -9,26 +10,47 @@ const email = faker.internet.email();
 const imageUrl = faker.image.url();
 const gpa = faker.number.float({ max: 4, precision: 0.1 });
 
-const studentsList = () => {
+const StudentsList = () => {
   const { data, isError, isLoading } = useGetStudentsQuery();
 
+  const [sortBy, setSortBy] = useState("lastName");
+
+  const sortStudents = (students, sortBy) => {
+    return [...students].sort((a, b) => {
+      if (sortBy === "gpa") {
+        return b[sortBy] - a[sortBy];
+      } else {
+        return a[sortBy].localeCompare(b[sortBy]);
+      }
+    });
+  };
+
+  const sortedStudents = sortStudents(data, sortBy);
+
   if (isLoading) {
-    return <p>Loading . . .</p>;
+    return <p>Loading...</p>;
   }
 
   if (isError) {
-    return <p>Error . . .</p>;
+    return <p>Error...</p>;
   }
 
-  console.log(`List of students: ${data}`);
-
   return (
-    <>
-      {data.map((student, index) => (
-        <Student student={s} key={`${student.student}-${index}`} />
+    <div>
+      <div>
+        <label>
+          Sort by:
+          <select onChange={(e) => setSortBy(e.target.value)}>
+            <option value="lastName">Last Name</option>
+            <option value="gpa">GPA</option>
+          </select>
+        </label>
+      </div>
+      {sortedStudents.map((student, index) => (
+        <Student student={student} key={index} />
       ))}
-    </>
+    </div>
   );
 };
 
-export default studentsList;
+export default StudentsList;

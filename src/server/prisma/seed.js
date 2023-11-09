@@ -14,6 +14,7 @@ const seed = async () => {
         firstname: firstName,
         lastname: lastName,
         email: email,
+        imgUrl: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png",
         gpa: gpa,
       },
     });
