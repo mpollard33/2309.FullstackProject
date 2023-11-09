@@ -11,10 +11,10 @@ const seed = async () => {
 
     await prisma.student.create({
       data: {
-        firstname: firstName,
-        lastname: lastName,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
-        imgUrl: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png",
+        imageUrl: imageUrl,
         gpa: gpa,
       },
     });
